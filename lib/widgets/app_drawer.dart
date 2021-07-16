@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/screens/user_products_screen.dart';
 import '../screens/products_overview_screen.dart';
 import '../screens/orders_screen.dart';
 
-class MainDrawer extends StatelessWidget {
+class AppDrawer extends StatelessWidget {
   Widget _buildListTile(IconData icon, String title, Function tapHandler) {
     return ListTile(
       leading: Icon(
@@ -41,19 +42,21 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
-          _buildListTile(Icons.home_filled, 'Home', () {
+          Divider(),
+          _buildListTile(Icons.shop, 'Shop', () {
             Navigator.of(context)
                 .pushReplacementNamed(ProductsOverviewScreen.routeName);
           }),
-          SizedBox(
-            height: 20,
-          ),
-          _buildListTile(Icons.shopping_bag_outlined, 'Your Orders', () {
+          Divider(),
+          _buildListTile(Icons.payment, 'Your Orders', () {
             Navigator.of(context).pushReplacementNamed(OrdersScreen.routeName);
           }),
+          Divider(),
+          _buildListTile(Icons.edit, 'Manage Products', () {
+            Navigator.of(context)
+                .pushReplacementNamed(UserProductsScreen.routeName);
+          }),
+          Divider(),
         ],
       ),
     );
