@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/helpers/custom_route.dart';
 import 'package:flutter_complete_guide/screens/user_products_screen.dart';
 import '../screens/products_overview_screen.dart';
 import '../screens/orders_screen.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth.dart';
+import '../helpers/custom_route.dart';
 
 class AppDrawer extends StatelessWidget {
   Widget _buildListTile(IconData icon, String title, Function tapHandler) {
@@ -50,11 +54,22 @@ class AppDrawer extends StatelessWidget {
           Divider(),
           _buildListTile(Icons.payment, 'Your Orders', () {
             Navigator.of(context).pushReplacementNamed(OrdersScreen.routeName);
+            // Navigator.of(context).pushReplacement(
+            //   CustomRoute(
+            //     builder: (ctx) => OrdersScreen(),
+            //   ),
+            // );
           }),
           Divider(),
           _buildListTile(Icons.edit, 'Manage Products', () {
             Navigator.of(context)
                 .pushReplacementNamed(UserProductsScreen.routeName);
+          }),
+          Divider(),
+          _buildListTile(Icons.exit_to_app, 'Log Out', () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacementNamed('/');
+            Provider.of<Auth>(context, listen: false).logout();
           }),
           Divider(),
         ],
